@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
-    <title>BRQ Hub · Modern App</title>
-    <!-- Fonts: Creepster (horror/monster) + Inter -->
+    <title>BRQ Hub</title>
+    <!-- Fonts: Creepster + Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -39,7 +38,7 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            transition: background 0.3s ease;
+            transition: background 0.4s ease;
             position: relative;
         }
 
@@ -50,7 +49,6 @@
             padding: 20px;
             scroll-behavior: smooth;
         }
-
         .content-scroll::-webkit-scrollbar {
             width: 4px;
         }
@@ -72,7 +70,6 @@
             width: 100%;
             padding: 20px;
         }
-
         .login-card {
             background: rgba(20, 24, 50, 0.92);
             backdrop-filter: blur(16px);
@@ -84,7 +81,6 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(140, 100, 255, 0.3);
             animation: fadeSlideUp 0.5s ease;
         }
-
         .brand-horror {
             font-family: 'Creepster', cursive;
             font-size: 3rem;
@@ -96,7 +92,6 @@
             margin-bottom: 24px;
             letter-spacing: 2px;
         }
-
         .video-eye {
             width: 100%;
             border-radius: 20px;
@@ -111,7 +106,6 @@
             aspect-ratio: 16 / 9;
             object-fit: cover;
         }
-
         .input-group {
             margin-bottom: 18px;
         }
@@ -134,7 +128,6 @@
         .input-group input::placeholder {
             color: #b9beff;
         }
-
         .login-btn {
             width: 100%;
             background: linear-gradient(95deg, #7a5cff, #b07eff);
@@ -165,8 +158,6 @@
             flex-direction: column;
             height: 100%;
         }
-
-        /* Bottom Navigation */
         .bottom-nav {
             background: rgba(15, 18, 40, 0.95);
             backdrop-filter: blur(20px);
@@ -176,6 +167,7 @@
             padding: 8px 20px 12px;
             border-top: 1px solid rgba(176, 126, 255, 0.35);
             border-radius: 28px 28px 0 0;
+            transition: background 0.4s ease;
         }
         .nav-item {
             display: flex;
@@ -203,7 +195,7 @@
             transform: translateY(-2px);
         }
 
-        /* Home & Settings Pages */
+        /* Home & Settings */
         .page-content {
             animation: fadeIn 0.3s ease;
         }
@@ -216,6 +208,7 @@
             max-width: 320px;
             margin: 40px auto;
             border: 1px solid rgba(176, 126, 255, 0.4);
+            transition: background 0.4s ease, border-color 0.4s ease;
         }
         .center-card h2 {
             font-size: 1.6rem;
@@ -230,15 +223,16 @@
             color: #e2e6ff;
         }
 
-        /* Settings Panel - Modern dropdown & logout button */
+        /* Settings Panel - Modern */
         .settings-panel {
             background: rgba(20, 24, 50, 0.8);
             backdrop-filter: blur(12px);
             border-radius: 32px;
-            padding: 24px;
+            padding: 28px 24px;
             max-width: 380px;
             margin: 30px auto;
             border: 1px solid rgba(176, 126, 255, 0.4);
+            transition: background 0.4s ease, border-color 0.4s ease;
         }
         .setting-row {
             display: flex;
@@ -253,6 +247,7 @@
         .setting-label {
             font-weight: 600;
             color: #f0f2ff;
+            font-size: 0.95rem;
         }
         .version-badge {
             background: #2a2f58;
@@ -261,61 +256,68 @@
             font-size: 0.85rem;
             font-weight: 600;
             color: white;
+            transition: background 0.4s ease;
         }
         
-        /* ---------- MODERN DROPDOWN (CUSTOM STYLE) ---------- */
-        .custom-select-wrapper {
+        /* Modern Dropdown Khusus Settings */
+        .theme-select-wrapper {
             position: relative;
-            width: 160px;
+            width: 170px;
         }
-        .custom-select {
+        .theme-select {
             background: linear-gradient(135deg, #11162f, #0d122b);
-            border: 1px solid rgba(140, 100, 255, 0.5);
+            border: 1.5px solid rgba(140, 100, 255, 0.6);
             border-radius: 40px;
-            padding: 8px 32px 8px 16px;
+            padding: 10px 36px 10px 18px;
             color: #ffffff;
             font-weight: 500;
             font-size: 0.85rem;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
             appearance: none;
             -webkit-appearance: none;
             width: 100%;
             font-family: 'Inter', sans-serif;
+            letter-spacing: 0.3px;
         }
-        .custom-select:hover {
-            border-color: #b07eff;
-            background: linear-gradient(135deg, #1a1f42, #111633);
-            box-shadow: 0 0 8px rgba(176, 126, 255, 0.3);
-        }
-        .custom-select:focus {
-            outline: none;
+        .theme-select:hover {
             border-color: #c292ff;
+            background: linear-gradient(135deg, #1a1f48, #12173a);
+            box-shadow: 0 0 12px rgba(176, 126, 255, 0.4);
+            transform: translateY(-1px);
         }
-        .custom-select-wrapper::after {
+        .theme-select:focus {
+            outline: none;
+            border-color: #dbbaff;
+            box-shadow: 0 0 0 3px rgba(176, 126, 255, 0.3);
+        }
+        .theme-select-wrapper::after {
             content: '\f0d7';
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
             position: absolute;
-            right: 14px;
+            right: 16px;
             top: 50%;
             transform: translateY(-50%);
             color: #b07eff;
             pointer-events: none;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
+            transition: transform 0.2s;
         }
-        
-        /* Modern Option styling (via CSS doesn't fully control dropdown options, but background improved) */
-        .custom-select option {
-            background: #11162f;
+        .theme-select-wrapper:hover::after {
+            transform: translateY(-50%) rotate(180deg);
+        }
+        .theme-select option {
+            background: #0f132e;
             color: white;
-            padding: 10px;
+            padding: 12px;
+            font-weight: 500;
         }
         
-        /* ---------- LOGOUT BUTTON (CUSTOM ICON) ---------- */
+        /* Logout Button */
         .logout-btn {
             width: 100%;
-            background: linear-gradient(95deg, rgba(220, 70, 70, 0.8), rgba(180, 50, 50, 0.9));
+            background: linear-gradient(95deg, rgba(220, 70, 70, 0.85), rgba(180, 50, 50, 0.95));
             border: none;
             padding: 12px;
             border-radius: 40px;
@@ -323,7 +325,7 @@
             font-size: 0.95rem;
             color: white;
             cursor: pointer;
-            transition: all 0.25s;
+            transition: all 0.25s ease;
             margin-top: 20px;
             display: flex;
             align-items: center;
@@ -339,13 +341,12 @@
         .logout-btn:hover {
             transform: scale(0.98);
             background: linear-gradient(95deg, rgb(200, 55, 55), rgb(160, 40, 40));
-            box-shadow: 0 4px 12px rgba(220, 70, 70, 0.4);
+            box-shadow: 0 4px 12px rgba(220, 70, 70, 0.5);
         }
         .logout-btn:hover i {
             transform: translateX(3px);
         }
 
-        /* Animations */
         @keyframes fadeSlideUp {
             from { opacity: 0; transform: translateY(20px);}
             to { opacity: 1; transform: translateY(0);}
@@ -355,13 +356,13 @@
             to { opacity: 1; }
         }
 
-        /* Responsive */
         @media (max-width: 550px) {
             body { padding: 10px; }
             .app-container { height: 95vh; border-radius: 28px; }
             .brand-horror { font-size: 2.4rem; }
             .login-card { padding: 24px 20px; }
-            .custom-select-wrapper { width: 140px; }
+            .theme-select-wrapper { width: 150px; }
+            .setting-label { font-size: 0.85rem; }
         }
         @media (min-width: 769px) {
             .app-container { height: 85vh; max-height: 750px; }
@@ -373,240 +374,285 @@
     </style>
 </head>
 <body>
-<div class="app-container" id="appContainer">
-    <!-- LOGIN SECTION -->
-    <div id="loginPage" class="login-page">
-        <div class="login-card">
-            <div class="brand-horror">BRQ Hub</div>
-            <div class="video-eye">
-                <video autoplay muted loop playsinline id="eyeVideo">
-                    <source src="eye.mp4" type="video/mp4">
-                </video>
-            </div>
-            <form id="loginForm" action="javascript:void(0);">
-                <div class="input-group">
-                    <input type="text" id="username" placeholder="Username" required>
+    <div class="app-container" id="appContainer">
+        <!-- LOGIN SECTION -->
+        <div id="loginPage" class="login-page">
+            <div class="login-card">
+                <div class="brand-horror">BRQ Hub</div>
+                <div class="video-eye">
+                    <video autoplay muted loop playsinline id="eyeVideo">
+                        <source src="eye.mp4" type="video/mp4">
+                    </video>
                 </div>
-                <div class="input-group">
-                    <input type="password" id="password" placeholder="Password" required>
-                </div>
-                <button type="submit" class="login-btn">Login</button>
-                <div id="loginErrorMsg" class="login-error"></div>
-            </form>
-        </div>
-    </div>
-
-    <!-- MAIN APP (hidden awal) -->
-    <div id="mainApp" class="main-app hidden">
-        <div class="content-scroll" id="pageContent">
-            <!-- Dinamis diisi oleh JS -->
-        </div>
-        <div class="bottom-nav">
-            <button class="nav-item" id="homeNavBtn">
-                <i class="fas fa-compass"></i>
-                <span>Home</span>
-            </button>
-            <button class="nav-item" id="settingsNavBtn">
-                <i class="fas fa-sliders-h"></i>
-                <span>Settings</span>
-            </button>
-        </div>
-    </div>
-</div>
-
-<script>
-    // ---------- THEME CONFIG (CUSTOM default) ----------
-    const themes = {
-        "CUSTOM": {
-            bodyBg: "radial-gradient(circle at 30% 20%, #0f1128, #03051a)",
-            containerBg: "rgba(8, 12, 28, 0.65)",
-            navBg: "rgba(15, 18, 40, 0.95)"
-        },
-        "Dark Purple": {
-            bodyBg: "radial-gradient(circle at 25% 15%, #1a1035, #050110)",
-            containerBg: "rgba(20, 12, 40, 0.7)",
-            navBg: "rgba(28, 18, 50, 0.95)"
-        },
-        "Dark Blue": {
-            bodyBg: "radial-gradient(circle at 70% 40%, #0a1a3a, #01061a)",
-            containerBg: "rgba(8, 18, 42, 0.7)",
-            navBg: "rgba(10, 22, 50, 0.95)"
-        },
-        "Midnight Violet": {
-            bodyBg: "radial-gradient(circle at 45% 50%, #18163a, #030218)",
-            containerBg: "rgba(22, 18, 48, 0.7)",
-            navBg: "rgba(28, 22, 55, 0.95)"
-        }
-    };
-    let currentTheme = "CUSTOM";
-
-    function applyTheme(themeKey) {
-        const t = themes[themeKey];
-        if (!t) return;
-        document.body.style.background = t.bodyBg;
-        const container = document.getElementById('appContainer');
-        if (container) container.style.background = t.containerBg;
-        const nav = document.querySelector('.bottom-nav');
-        if (nav) nav.style.background = t.navBg;
-    }
-
-    // DOM Elements
-    const loginPageDiv = document.getElementById('loginPage');
-    const mainAppDiv = document.getElementById('mainApp');
-    const loginForm = document.getElementById('loginForm');
-    const errorMsg = document.getElementById('loginErrorMsg');
-    const pageContentDiv = document.getElementById('pageContent');
-    const homeBtn = document.getElementById('homeNavBtn');
-    const settingsBtn = document.getElementById('settingsNavBtn');
-
-    // ---------- LOGIN HANDLER ----------
-    function doLogin(e) {
-        e.preventDefault();
-        const username = document.getElementById('username').value.trim();
-        const password = document.getElementById('password').value.trim();
-        if (username === "" || password === "") {
-            errorMsg.innerText = "Username & password harus diisi.";
-            return;
-        }
-        errorMsg.innerText = "";
-        loginPageDiv.classList.add('hidden');
-        mainAppDiv.classList.remove('hidden');
-        loadPage('home');
-    }
-    loginForm.addEventListener('submit', doLogin);
-
-    // ---------- LOGOUT FUNCTION (dengan animasi smooth) ----------
-    function logout() {
-        // Reset form login
-        document.getElementById('username').value = '';
-        document.getElementById('password').value = '';
-        errorMsg.innerText = '';
-        // Kembali ke login page
-        mainAppDiv.classList.add('hidden');
-        loginPageDiv.classList.remove('hidden');
-        // Reset video jika perlu (tetap muter)
-        const video = document.getElementById('eyeVideo');
-        if (video) video.play().catch(() => {});
-    }
-
-    // ---------- PAGE MANAGEMENT ----------
-    let activePage = 'home';
-
-    function setActiveNavButton(page) {
-        if (page === 'home') {
-            homeBtn.classList.add('active');
-            settingsBtn.classList.remove('active');
-        } else {
-            settingsBtn.classList.add('active');
-            homeBtn.classList.remove('active');
-        }
-    }
-
-    function renderHome() {
-        return `
-            <div class="page-content">
-                <div class="center-card">
-                    <h2>📱 APP dalam pengembangan</h2>
-                    <p>Fitur menarik segera hadir</p>
-                </div>
-            </div>
-        `;
-    }
-
-    function renderSettings() {
-        return `
-            <div class="page-content">
-                <div class="settings-panel">
-                    <div class="setting-row">
-                        <span class="setting-label">Versi aplikasi</span>
-                        <span class="version-badge">1.1</span>
+                <form id="loginForm" action="javascript:void(0);">
+                    <div class="input-group">
+                        <input type="text" id="username" placeholder="Username" autocomplete="off" required>
                     </div>
-                    <div class="setting-row">
-                        <span class="setting-label">Theme settings</span>
-                        <div class="custom-select-wrapper">
-                            <select id="themeSelectDropdown" class="custom-select">
-                                <option value="CUSTOM" ${currentTheme === 'CUSTOM' ? 'selected' : ''}>CUSTOM</option>
-                                <option value="Dark Purple" ${currentTheme === 'Dark Purple' ? 'selected' : ''}>Dark Purple</option>
-                                <option value="Dark Blue" ${currentTheme === 'Dark Blue' ? 'selected' : ''}>Dark Blue</option>
-                                <option value="Midnight Violet" ${currentTheme === 'Midnight Violet' ? 'selected' : ''}>Midnight Violet</option>
-                            </select>
+                    <div class="input-group">
+                        <input type="password" id="password" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="login-btn">Login</button>
+                    <div id="loginErrorMsg" class="login-error"></div>
+                </form>
+            </div>
+        </div>
+
+        <!-- MAIN APP -->
+        <div id="mainApp" class="main-app hidden">
+            <div class="content-scroll" id="pageContent"></div>
+            <div class="bottom-nav">
+                <button class="nav-item" id="homeNavBtn">
+                    <i class="fas fa-compass"></i>
+                    <span>Home</span>
+                </button>
+                <button class="nav-item" id="settingsNavBtn">
+                    <i class="fas fa-sliders-h"></i>
+                    <span>Settings</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ---------- THEME CONFIG (Default = theme awal) ----------
+        const themes = {
+            "Default": {
+                bodyBg: "radial-gradient(circle at 30% 20%, #0f1128, #03051a)",
+                containerBg: "rgba(8, 12, 28, 0.65)",
+                navBg: "rgba(15, 18, 40, 0.95)",
+                cardBg: "rgba(20, 24, 50, 0.8)",
+                accent: "#b07eff"
+            },
+            "Dark Purple": {
+                bodyBg: "radial-gradient(circle at 25% 15%, #2d1b4e, #0a0318)",
+                containerBg: "rgba(35, 20, 55, 0.75)",
+                navBg: "rgba(45, 30, 70, 0.96)",
+                cardBg: "rgba(55, 35, 85, 0.85)",
+                accent: "#c88eff"
+            },
+            "Dark Blue": {
+                bodyBg: "radial-gradient(circle at 70% 40%, #0a2a5a, #010a20)",
+                containerBg: "rgba(10, 35, 65, 0.75)",
+                navBg: "rgba(12, 40, 75, 0.96)",
+                cardBg: "rgba(15, 45, 80, 0.85)",
+                accent: "#6a9eff"
+            },
+            "Midnight Violet": {
+                bodyBg: "radial-gradient(circle at 50% 50%, #28206a, #0a0525)",
+                containerBg: "rgba(35, 28, 80, 0.75)",
+                navBg: "rgba(45, 35, 95, 0.96)",
+                cardBg: "rgba(55, 45, 110, 0.85)",
+                accent: "#c58aff"
+            },
+            "Deep Emerald": {
+                bodyBg: "radial-gradient(circle at 20% 80%, #0a3d2a, #021a0f)",
+                containerBg: "rgba(10, 55, 40, 0.7)",
+                navBg: "rgba(15, 70, 50, 0.94)",
+                cardBg: "rgba(20, 85, 60, 0.85)",
+                accent: "#5fe0b0"
+            }
+        };
+        
+        let currentTheme = "Default";
+
+        function applyTheme(themeKey) {
+            const t = themes[themeKey];
+            if (!t) return;
+            document.body.style.background = t.bodyBg;
+            const container = document.getElementById('appContainer');
+            if (container) container.style.background = t.containerBg;
+            const nav = document.querySelector('.bottom-nav');
+            if (nav) nav.style.background = t.navBg;
+            
+            // Update card backgrounds dynamically
+            const centerCards = document.querySelectorAll('.center-card, .settings-panel');
+            centerCards.forEach(card => {
+                card.style.background = t.cardBg;
+                if (t.accent) card.style.borderColor = t.accent + '80';
+            });
+            
+            // Update version badge
+            const badges = document.querySelectorAll('.version-badge');
+            badges.forEach(badge => {
+                badge.style.background = t.accent ? t.accent + '40' : '#2a2f58';
+            });
+        }
+
+        // DOM Elements
+        const loginPageDiv = document.getElementById('loginPage');
+        const mainAppDiv = document.getElementById('mainApp');
+        const loginForm = document.getElementById('loginForm');
+        const errorMsg = document.getElementById('loginErrorMsg');
+        const pageContentDiv = document.getElementById('pageContent');
+        const homeBtn = document.getElementById('homeNavBtn');
+        const settingsBtn = document.getElementById('settingsNavBtn');
+
+        // ---------- LOGIN HANDLER (HANYA admin : 1234) ----------
+        function doLogin(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            
+            if (username === "admin" && password === "1234") {
+                errorMsg.innerText = "";
+                loginPageDiv.classList.add('hidden');
+                mainAppDiv.classList.remove('hidden');
+                loadPage('home');
+            } else {
+                errorMsg.innerText = "Username atau password salah!";
+            }
+        }
+        loginForm.addEventListener('submit', doLogin);
+
+        // ---------- LOGOUT FUNCTION ----------
+        function logout() {
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            errorMsg.innerText = '';
+            mainAppDiv.classList.add('hidden');
+            loginPageDiv.classList.remove('hidden');
+            const video = document.getElementById('eyeVideo');
+            if (video) video.play().catch(() => {});
+        }
+
+        // ---------- PAGE MANAGEMENT ----------
+        let activePage = 'home';
+
+        function setActiveNavButton(page) {
+            if (page === 'home') {
+                homeBtn.classList.add('active');
+                settingsBtn.classList.remove('active');
+            } else {
+                settingsBtn.classList.add('active');
+                homeBtn.classList.remove('active');
+            }
+        }
+
+        function renderHome() {
+            return `
+                <div class="page-content">
+                    <div class="center-card">
+                        <h2>📱 APP dalam pengembangan</h2>
+                        <p>Fitur menarik segera hadir</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderSettings() {
+            return `
+                <div class="page-content">
+                    <div class="settings-panel">
+                        <div class="setting-row">
+                            <span class="setting-label">Versi aplikasi</span>
+                            <span class="version-badge">1.2</span>
+                        </div>
+                        <div class="setting-row">
+                            <span class="setting-label">Theme settings</span>
+                            <div class="theme-select-wrapper">
+                                <select id="themeSelectDropdown" class="theme-select">
+                                    <option value="Default" ${currentTheme === 'Default' ? 'selected' : ''}>🌙 Default</option>
+                                    <option value="Dark Purple" ${currentTheme === 'Dark Purple' ? 'selected' : ''}>🟣 Dark Purple</option>
+                                    <option value="Dark Blue" ${currentTheme === 'Dark Blue' ? 'selected' : ''}>🔵 Dark Blue</option>
+                                    <option value="Midnight Violet" ${currentTheme === 'Midnight Violet' ? 'selected' : ''}>🌌 Midnight Violet</option>
+                                    <option value="Deep Emerald" ${currentTheme === 'Deep Emerald' ? 'selected' : ''}>🍃 Deep Emerald</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="setting-row" style="border-bottom: none; padding-top: 20px;">
+                            <button id="logoutButton" class="logout-btn">
+                                <i class="fas fa-sign-out-alt"></i> 
+                                <span>Logout</span>
+                            </button>
                         </div>
                     </div>
-                    <div class="setting-row" style="border-bottom: none; padding-top: 20px;">
-                        <button id="logoutButton" class="logout-btn">
-                            <i class="fas fa-sign-out-alt"></i> 
-                            <span>Logout</span>
-                        </button>
-                    </div>
                 </div>
-            </div>
-        `;
-    }
-
-    function loadPage(page) {
-        activePage = page;
-        if (page === 'home') {
-            pageContentDiv.innerHTML = renderHome();
-            setActiveNavButton('home');
-        } else if (page === 'settings') {
-            pageContentDiv.innerHTML = renderSettings();
-            setActiveNavButton('settings');
-            
-            // Attach theme dropdown event
-            const themeSelect = document.getElementById('themeSelectDropdown');
-            if (themeSelect) {
-                themeSelect.addEventListener('change', (e) => {
-                    currentTheme = e.target.value;
-                    applyTheme(currentTheme);
-                    loadPage('settings'); // re-render biar dropdown value tetap sesuai
-                });
-            }
-            
-            // Attach logout button event (dengan icon custom)
-            const logoutBtn = document.getElementById('logoutButton');
-            if (logoutBtn) {
-                logoutBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    logout();
-                });
-            }
+            `;
         }
-        if (pageContentDiv) pageContentDiv.scrollTop = 0;
-    }
 
-    // Navigasi
-    homeBtn.addEventListener('click', () => {
-        if (activePage !== 'home') loadPage('home');
-    });
-    settingsBtn.addEventListener('click', () => {
-        if (activePage !== 'settings') loadPage('settings');
-    });
+        function loadPage(page) {
+            activePage = page;
+            if (page === 'home') {
+                pageContentDiv.innerHTML = renderHome();
+                setActiveNavButton('home');
+                // Apply theme ke home card
+                const t = themes[currentTheme];
+                if (t) {
+                    const homeCard = document.querySelector('.center-card');
+                    if (homeCard) {
+                        homeCard.style.background = t.cardBg;
+                        homeCard.style.borderColor = t.accent + '80';
+                    }
+                }
+            } else if (page === 'settings') {
+                pageContentDiv.innerHTML = renderSettings();
+                setActiveNavButton('settings');
+                
+                // Apply theme awal ke settings panel
+                const t = themes[currentTheme];
+                if (t) {
+                    const settingsPanel = document.querySelector('.settings-panel');
+                    if (settingsPanel) {
+                        settingsPanel.style.background = t.cardBg;
+                        settingsPanel.style.borderColor = t.accent + '80';
+                    }
+                    const versionBadge = document.querySelector('.version-badge');
+                    if (versionBadge) versionBadge.style.background = t.accent + '40';
+                }
+                
+                const themeSelect = document.getElementById('themeSelectDropdown');
+                if (themeSelect) {
+                    themeSelect.addEventListener('change', (e) => {
+                        const newTheme = e.target.value;
+                        currentTheme = newTheme;
+                        applyTheme(currentTheme);
+                        // Re-render settings untuk update dropdown state
+                        loadPage('settings');
+                    });
+                }
+                
+                const logoutBtn = document.getElementById('logoutButton');
+                if (logoutBtn) {
+                    logoutBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        logout();
+                    });
+                }
+            }
+            if (pageContentDiv) pageContentDiv.scrollTop = 0;
+        }
 
-    // Handle video
-    const videoElem = document.getElementById('eyeVideo');
-    if (videoElem) {
-        videoElem.addEventListener('error', () => {
-            videoElem.style.background = "#11152e";
+        homeBtn.addEventListener('click', () => {
+            if (activePage !== 'home') loadPage('home');
         });
-        videoElem.play().catch(() => {});
-    }
+        settingsBtn.addEventListener('click', () => {
+            if (activePage !== 'settings') loadPage('settings');
+        });
 
-    // Apply theme default
-    applyTheme('CUSTOM');
-    
-    // Tambahan style untuk modern dropdown options (global)
-    const styleInject = document.createElement('style');
-    styleInject.textContent = `
-        .custom-select option {
-            background: #0f132e;
-            color: #f0f2ff;
-            padding: 10px;
+        const videoElem = document.getElementById('eyeVideo');
+        if (videoElem) {
+            videoElem.addEventListener('error', () => {
+                videoElem.style.background = "#11152e";
+            });
+            videoElem.play().catch(() => {});
         }
-        .custom-select:focus option:checked {
-            background: linear-gradient(135deg, #2a2f58, #1e2348);
-        }
-    `;
-    document.head.appendChild(styleInject);
-</script>
+
+        // Apply default theme (Default)
+        applyTheme('Default');
+        
+        const styleInject = document.createElement('style');
+        styleInject.textContent = `
+            .theme-select option {
+                background: #0f132e;
+                color: #f0f2ff;
+                padding: 12px;
+                font-weight: 500;
+            }
+            .theme-select option:hover {
+                background: linear-gradient(135deg, #2a2f58, #1e2348);
+            }
+        `;
+        document.head.appendChild(styleInject);
+    </script>
 </body>
 </html>
