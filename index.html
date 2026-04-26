@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
-    <title>BRQ Hub</title>
+    <title>BRQ CORE</title>
     <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -229,7 +229,7 @@
             letter-spacing: -0.3px;
             font-family: 'Inter', sans-serif;
         }
-        .hub-text {
+        .core-text {
             font-size: 1.3rem;
             font-weight: 500;
             color: #a5a9ce;
@@ -537,6 +537,12 @@
             flex-wrap: wrap;
             gap: 10px;
         }
+        .scraper-result-header span {
+            color: #f5e6b0;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
         .scraper-result-actions {
             display: flex;
             gap: 8px;
@@ -602,7 +608,7 @@
             .nav-item i { font-size: 1.3rem; }
             .nav-item span { font-size: 0.6rem; }
             .welcome-text { font-size: 1.3rem; }
-            .hub-text { font-size: 1.1rem; }
+            .core-text { font-size: 1.1rem; }
             .scraper-input-group { flex-direction: column; }
             .scraper-btn { padding: 10px; }
         }
@@ -681,7 +687,7 @@
     <div class="app-container" id="appContainer">
         <div id="loginPage" class="login-page">
             <div class="login-card">
-                <div class="brand-horror">BRQ Hub</div>
+                <div class="brand-horror">BRQ CORE</div>
                 <div class="video-eye">
                     <video autoplay muted loop playsinline id="eyeVideo">
                         <source src="eye.mp4" type="video/mp4">
@@ -778,23 +784,69 @@
         });
 
         // ============ APP LOGIC ============
+        // KOTA INDONESIA LENGKAP (25+ Kota dari Sabang sampai Merauke)
         const indonesiaCities = [
-            { name: "Jakarta", timezone: "Asia/Jakarta" }, { name: "Bali", timezone: "Asia/Makassar" },
-            { name: "Surabaya", timezone: "Asia/Jakarta" }, { name: "Medan", timezone: "Asia/Jakarta" },
-            { name: "Bandung", timezone: "Asia/Jakarta" }, { name: "Makassar", timezone: "Asia/Makassar" },
-            { name: "Semarang", timezone: "Asia/Jakarta" }, { name: "Palembang", timezone: "Asia/Jakarta" },
-            { name: "Yogyakarta", timezone: "Asia/Jakarta" }, { name: "Malang", timezone: "Asia/Jakarta" },
-            { name: "Pontianak", timezone: "Asia/Pontianak" }, { name: "Jayapura", timezone: "Asia/Jayapura" }
+            { name: "Sabang", timezone: "Asia/Jakarta" },
+            { name: "Banda Aceh", timezone: "Asia/Jakarta" },
+            { name: "Medan", timezone: "Asia/Jakarta" },
+            { name: "Padang", timezone: "Asia/Jakarta" },
+            { name: "Pekanbaru", timezone: "Asia/Jakarta" },
+            { name: "Batam", timezone: "Asia/Jakarta" },
+            { name: "Palembang", timezone: "Asia/Jakarta" },
+            { name: "Bengkulu", timezone: "Asia/Jakarta" },
+            { name: "Bandar Lampung", timezone: "Asia/Jakarta" },
+            { name: "Jakarta", timezone: "Asia/Jakarta" },
+            { name: "Bandung", timezone: "Asia/Jakarta" },
+            { name: "Semarang", timezone: "Asia/Jakarta" },
+            { name: "Yogyakarta", timezone: "Asia/Jakarta" },
+            { name: "Surabaya", timezone: "Asia/Jakarta" },
+            { name: "Malang", timezone: "Asia/Jakarta" },
+            { name: "Banyuwangi", timezone: "Asia/Jakarta" },
+            { name: "Denpasar", timezone: "Asia/Makassar" },
+            { name: "Mataram", timezone: "Asia/Makassar" },
+            { name: "Kupang", timezone: "Asia/Makassar" },
+            { name: "Pontianak", timezone: "Asia/Pontianak" },
+            { name: "Palangkaraya", timezone: "Asia/Pontianak" },
+            { name: "Banjarmasin", timezone: "Asia/Makassar" },
+            { name: "Balikpapan", timezone: "Asia/Makassar" },
+            { name: "Samarinda", timezone: "Asia/Makassar" },
+            { name: "Manado", timezone: "Asia/Makassar" },
+            { name: "Palu", timezone: "Asia/Makassar" },
+            { name: "Makassar", timezone: "Asia/Makassar" },
+            { name: "Kendari", timezone: "Asia/Makassar" },
+            { name: "Gorontalo", timezone: "Asia/Makassar" },
+            { name: "Ambon", timezone: "Asia/Jayapura" },
+            { name: "Ternate", timezone: "Asia/Jayapura" },
+            { name: "Sorong", timezone: "Asia/Jayapura" },
+            { name: "Manokwari", timezone: "Asia/Jayapura" },
+            { name: "Jayapura", timezone: "Asia/Jayapura" },
+            { name: "Merauke", timezone: "Asia/Jayapura" }
         ];
         
         const internationalCountries = [
-            { name: "Amerika Serikat", timezone: "America/New_York" }, { name: "Inggris", timezone: "Europe/London" },
-            { name: "Jepang", timezone: "Asia/Tokyo" }, { name: "Australia", timezone: "Australia/Sydney" },
-            { name: "Uni Emirat Arab", timezone: "Asia/Dubai" }, { name: "China", timezone: "Asia/Shanghai" },
-            { name: "Singapura", timezone: "Asia/Singapore" }, { name: "Malaysia", timezone: "Asia/Kuala_Lumpur" },
-            { name: "Thailand", timezone: "Asia/Bangkok" }, { name: "Korea Selatan", timezone: "Asia/Seoul" },
-            { name: "India", timezone: "Asia/Kolkata" }, { name: "Prancis", timezone: "Europe/Paris" },
-            { name: "Jerman", timezone: "Europe/Berlin" }, { name: "Italia", timezone: "Europe/Rome" }
+            { name: "Amerika Serikat", timezone: "America/New_York" },
+            { name: "Inggris", timezone: "Europe/London" },
+            { name: "Jepang", timezone: "Asia/Tokyo" },
+            { name: "Australia", timezone: "Australia/Sydney" },
+            { name: "Uni Emirat Arab", timezone: "Asia/Dubai" },
+            { name: "China", timezone: "Asia/Shanghai" },
+            { name: "Singapura", timezone: "Asia/Singapore" },
+            { name: "Malaysia", timezone: "Asia/Kuala_Lumpur" },
+            { name: "Thailand", timezone: "Asia/Bangkok" },
+            { name: "Korea Selatan", timezone: "Asia/Seoul" },
+            { name: "India", timezone: "Asia/Kolkata" },
+            { name: "Prancis", timezone: "Europe/Paris" },
+            { name: "Jerman", timezone: "Europe/Berlin" },
+            { name: "Italia", timezone: "Europe/Rome" },
+            { name: "Spanyol", timezone: "Europe/Madrid" },
+            { name: "Belanda", timezone: "Europe/Amsterdam" },
+            { name: "Rusia", timezone: "Europe/Moscow" },
+            { name: "Turki", timezone: "Europe/Istanbul" },
+            { name: "Mesir", timezone: "Africa/Cairo" },
+            { name: "Afrika Selatan", timezone: "Africa/Johannesburg" },
+            { name: "Brasil", timezone: "America/Sao_Paulo" },
+            { name: "Kanada", timezone: "America/Toronto" },
+            { name: "Meksiko", timezone: "America/Mexico_City" }
         ];
         
         function getTimeForTimezone(timezone) {
@@ -812,7 +864,7 @@
                 <div class="home-container">
                     <div class="welcome-card">
                         <div class="welcome-text">Welcome, admin!</div>
-                        <div class="hub-text">BRQ Hub</div>
+                        <div class="core-text">BRQ CORE</div>
                     </div>
                     <button class="owner-btn" id="ownerBtn">
                         <i class="fas fa-user-cog"></i> Owner Social Media
@@ -844,9 +896,10 @@
                         <div class="changelog-section">
                             <div class="changelog-title"><i class="fas fa-history"></i> Changelog v1.4</div>
                             <ul class="changelog-list">
+                                <li><i class="fas fa-city"></i> Penambahan 25+ kota Indonesia lengkap</li>
                                 <li><i class="fas fa-user-cog"></i> Tombol Owner Social Media</li>
                                 <li><i class="fas fa-typography"></i> Perbaikan font semua teks</li>
-                                <li><i class="fas fa-globe"></i> World Clock 25+ lokasi dunia</li>
+                                <li><i class="fas fa-globe"></i> World Clock 40+ lokasi dunia</li>
                                 <li><i class="fas fa-file-code"></i> Fitur Code Scraper</li>
                                 <li><i class="fas fa-shield-alt"></i> Sistem keamanan anti-inspect</li>
                             </ul>
@@ -1037,7 +1090,7 @@
         document.getElementById('eyeVideo')?.addEventListener('error', function() { this.style.background = "#11152e"; });
         document.getElementById('eyeVideo')?.play().catch(() => {});
         
-        console.log("%c🚫 BRQ Hub - Protected", "color: #b07eff; font-size: 14px; font-weight: bold;");
+        console.log("%c🚫 BRQ CORE - Protected", "color: #b07eff; font-size: 14px; font-weight: bold;");
     </script>
 </body>
 </html>
