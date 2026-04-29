@@ -201,23 +201,22 @@
             transform: translateY(-2px);
         }
 
-        /* Home Page - Clean */
+        /* Home Page - with Video */
         .home-container {
             max-width: 500px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
             min-height: 100%;
         }
         .welcome-card {
             text-align: center;
             background: rgba(20, 24, 50, 0.75);
             backdrop-filter: blur(12px);
-            padding: 40px 30px;
+            padding: 30px 20px;
             border-radius: 32px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             border: 1px solid rgba(176, 126, 255, 0.4);
             width: 100%;
         }
@@ -239,6 +238,27 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+        }
+        .video-card {
+            background: rgba(20, 24, 50, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 28px;
+            padding: 20px;
+            border: 1px solid rgba(176, 126, 255, 0.3);
+            margin-bottom: 20px;
+        }
+        .video-wrapper {
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        .video-wrapper video {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
         }
         .owner-btn {
             width: 100%;
@@ -593,6 +613,51 @@
             font-weight: 500;
         }
 
+        /* Custom Notification */
+        .custom-notification {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: linear-gradient(135deg, rgba(30, 25, 55, 0.98), rgba(20, 18, 45, 0.98));
+            backdrop-filter: blur(20px);
+            border-radius: 50px;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 10001;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            opacity: 0;
+            visibility: hidden;
+            border: 1px solid rgba(176, 126, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 15px rgba(176, 126, 255, 0.2);
+            max-width: 90%;
+        }
+        .custom-notification.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+        .custom-notification i {
+            font-size: 1.2rem;
+        }
+        .custom-notification i.success {
+            color: #10b981;
+        }
+        .custom-notification i.error {
+            color: #ef4444;
+        }
+        .custom-notification i.info {
+            color: #b07eff;
+        }
+        .custom-notification span {
+            color: #f0f2ff;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
         @keyframes fadeSlideUp {
             from { opacity: 0; transform: translateY(20px);}
             to { opacity: 1; transform: translateY(0);}
@@ -684,6 +749,12 @@
         <button onclick="closeSecurityPopup()">OK, Saya Mengerti</button>
     </div>
 
+    <!-- Custom Notification -->
+    <div id="customNotification" class="custom-notification">
+        <i id="notificationIcon" class="fas fa-check-circle success"></i>
+        <span id="notificationMessage">Berhasil!</span>
+    </div>
+
     <div class="app-container" id="appContainer">
         <div id="loginPage" class="login-page">
             <div class="login-card">
@@ -718,6 +789,31 @@
     </div>
 
     <script>
+        // ============ CUSTOM NOTIFICATION ============
+        let notifTimeout;
+        
+        function showNotification(message, type = 'success') {
+            const notif = document.getElementById('customNotification');
+            const icon = document.getElementById('notificationIcon');
+            const msg = document.getElementById('notificationMessage');
+            
+            if (type === 'success') {
+                icon.className = 'fas fa-check-circle success';
+            } else if (type === 'error') {
+                icon.className = 'fas fa-exclamation-circle error';
+            } else {
+                icon.className = 'fas fa-info-circle info';
+            }
+            
+            msg.textContent = message;
+            notif.classList.add('show');
+            
+            if (notifTimeout) clearTimeout(notifTimeout);
+            notifTimeout = setTimeout(() => {
+                notif.classList.remove('show');
+            }, 2500);
+        }
+
         // ============ SECURITY SYSTEM ============
         let popupTimeout;
         
@@ -784,69 +880,36 @@
         });
 
         // ============ APP LOGIC ============
-        // KOTA INDONESIA LENGKAP (25+ Kota dari Sabang sampai Merauke)
         const indonesiaCities = [
-            { name: "Sabang", timezone: "Asia/Jakarta" },
-            { name: "Banda Aceh", timezone: "Asia/Jakarta" },
-            { name: "Medan", timezone: "Asia/Jakarta" },
-            { name: "Padang", timezone: "Asia/Jakarta" },
-            { name: "Pekanbaru", timezone: "Asia/Jakarta" },
-            { name: "Batam", timezone: "Asia/Jakarta" },
-            { name: "Palembang", timezone: "Asia/Jakarta" },
-            { name: "Bengkulu", timezone: "Asia/Jakarta" },
-            { name: "Bandar Lampung", timezone: "Asia/Jakarta" },
-            { name: "Jakarta", timezone: "Asia/Jakarta" },
-            { name: "Bandung", timezone: "Asia/Jakarta" },
-            { name: "Semarang", timezone: "Asia/Jakarta" },
-            { name: "Yogyakarta", timezone: "Asia/Jakarta" },
-            { name: "Surabaya", timezone: "Asia/Jakarta" },
-            { name: "Malang", timezone: "Asia/Jakarta" },
-            { name: "Banyuwangi", timezone: "Asia/Jakarta" },
-            { name: "Denpasar", timezone: "Asia/Makassar" },
-            { name: "Mataram", timezone: "Asia/Makassar" },
-            { name: "Kupang", timezone: "Asia/Makassar" },
-            { name: "Pontianak", timezone: "Asia/Pontianak" },
-            { name: "Palangkaraya", timezone: "Asia/Pontianak" },
-            { name: "Banjarmasin", timezone: "Asia/Makassar" },
-            { name: "Balikpapan", timezone: "Asia/Makassar" },
-            { name: "Samarinda", timezone: "Asia/Makassar" },
-            { name: "Manado", timezone: "Asia/Makassar" },
-            { name: "Palu", timezone: "Asia/Makassar" },
-            { name: "Makassar", timezone: "Asia/Makassar" },
-            { name: "Kendari", timezone: "Asia/Makassar" },
-            { name: "Gorontalo", timezone: "Asia/Makassar" },
-            { name: "Ambon", timezone: "Asia/Jayapura" },
-            { name: "Ternate", timezone: "Asia/Jayapura" },
-            { name: "Sorong", timezone: "Asia/Jayapura" },
-            { name: "Manokwari", timezone: "Asia/Jayapura" },
-            { name: "Jayapura", timezone: "Asia/Jayapura" },
+            { name: "Sabang", timezone: "Asia/Jakarta" }, { name: "Banda Aceh", timezone: "Asia/Jakarta" },
+            { name: "Medan", timezone: "Asia/Jakarta" }, { name: "Padang", timezone: "Asia/Jakarta" },
+            { name: "Pekanbaru", timezone: "Asia/Jakarta" }, { name: "Batam", timezone: "Asia/Jakarta" },
+            { name: "Palembang", timezone: "Asia/Jakarta" }, { name: "Bengkulu", timezone: "Asia/Jakarta" },
+            { name: "Bandar Lampung", timezone: "Asia/Jakarta" }, { name: "Jakarta", timezone: "Asia/Jakarta" },
+            { name: "Bandung", timezone: "Asia/Jakarta" }, { name: "Semarang", timezone: "Asia/Jakarta" },
+            { name: "Yogyakarta", timezone: "Asia/Jakarta" }, { name: "Surabaya", timezone: "Asia/Jakarta" },
+            { name: "Malang", timezone: "Asia/Jakarta" }, { name: "Banyuwangi", timezone: "Asia/Jakarta" },
+            { name: "Denpasar", timezone: "Asia/Makassar" }, { name: "Mataram", timezone: "Asia/Makassar" },
+            { name: "Kupang", timezone: "Asia/Makassar" }, { name: "Pontianak", timezone: "Asia/Pontianak" },
+            { name: "Palangkaraya", timezone: "Asia/Pontianak" }, { name: "Banjarmasin", timezone: "Asia/Makassar" },
+            { name: "Balikpapan", timezone: "Asia/Makassar" }, { name: "Samarinda", timezone: "Asia/Makassar" },
+            { name: "Manado", timezone: "Asia/Makassar" }, { name: "Palu", timezone: "Asia/Makassar" },
+            { name: "Makassar", timezone: "Asia/Makassar" }, { name: "Kendari", timezone: "Asia/Makassar" },
+            { name: "Gorontalo", timezone: "Asia/Makassar" }, { name: "Ambon", timezone: "Asia/Jayapura" },
+            { name: "Ternate", timezone: "Asia/Jayapura" }, { name: "Sorong", timezone: "Asia/Jayapura" },
+            { name: "Manokwari", timezone: "Asia/Jayapura" }, { name: "Jayapura", timezone: "Asia/Jayapura" },
             { name: "Merauke", timezone: "Asia/Jayapura" }
         ];
         
         const internationalCountries = [
-            { name: "Amerika Serikat", timezone: "America/New_York" },
-            { name: "Inggris", timezone: "Europe/London" },
-            { name: "Jepang", timezone: "Asia/Tokyo" },
-            { name: "Australia", timezone: "Australia/Sydney" },
-            { name: "Uni Emirat Arab", timezone: "Asia/Dubai" },
-            { name: "China", timezone: "Asia/Shanghai" },
-            { name: "Singapura", timezone: "Asia/Singapore" },
-            { name: "Malaysia", timezone: "Asia/Kuala_Lumpur" },
-            { name: "Thailand", timezone: "Asia/Bangkok" },
-            { name: "Korea Selatan", timezone: "Asia/Seoul" },
-            { name: "India", timezone: "Asia/Kolkata" },
-            { name: "Prancis", timezone: "Europe/Paris" },
-            { name: "Jerman", timezone: "Europe/Berlin" },
-            { name: "Italia", timezone: "Europe/Rome" },
-            { name: "Spanyol", timezone: "Europe/Madrid" },
-            { name: "Belanda", timezone: "Europe/Amsterdam" },
-            { name: "Rusia", timezone: "Europe/Moscow" },
-            { name: "Turki", timezone: "Europe/Istanbul" },
-            { name: "Mesir", timezone: "Africa/Cairo" },
-            { name: "Afrika Selatan", timezone: "Africa/Johannesburg" },
-            { name: "Brasil", timezone: "America/Sao_Paulo" },
-            { name: "Kanada", timezone: "America/Toronto" },
-            { name: "Meksiko", timezone: "America/Mexico_City" }
+            { name: "Amerika Serikat", timezone: "America/New_York" }, { name: "Inggris", timezone: "Europe/London" },
+            { name: "Jepang", timezone: "Asia/Tokyo" }, { name: "Australia", timezone: "Australia/Sydney" },
+            { name: "Uni Emirat Arab", timezone: "Asia/Dubai" }, { name: "China", timezone: "Asia/Shanghai" },
+            { name: "Singapura", timezone: "Asia/Singapore" }, { name: "Malaysia", timezone: "Asia/Kuala_Lumpur" },
+            { name: "Thailand", timezone: "Asia/Bangkok" }, { name: "Korea Selatan", timezone: "Asia/Seoul" },
+            { name: "India", timezone: "Asia/Kolkata" }, { name: "Prancis", timezone: "Europe/Paris" },
+            { name: "Jerman", timezone: "Europe/Berlin" }, { name: "Italia", timezone: "Europe/Rome" },
+            { name: "Spanyol", timezone: "Europe/Madrid" }, { name: "Belanda", timezone: "Europe/Amsterdam" }
         ];
         
         function getTimeForTimezone(timezone) {
@@ -865,6 +928,13 @@
                     <div class="welcome-card">
                         <div class="welcome-text">Welcome, admin!</div>
                         <div class="core-text">BRQ CORE</div>
+                    </div>
+                    <div class="video-card">
+                        <div class="video-wrapper">
+                            <video autoplay muted loop playsinline id="homeVideo">
+                                <source src="eye2.mp4" type="video/mp4">
+                            </video>
+                        </div>
                     </div>
                     <button class="owner-btn" id="ownerBtn">
                         <i class="fas fa-user-cog"></i> Owner Social Media
@@ -892,13 +962,14 @@
             return `
                 <div class="page-content">
                     <div class="settings-panel">
-                        <div class="setting-row"><span class="setting-label">Versi aplikasi</span><span class="version-badge">1.4</span></div>
+                        <div class="setting-row"><span class="setting-label">Versi aplikasi</span><span class="version-badge">1.5</span></div>
                         <div class="changelog-section">
-                            <div class="changelog-title"><i class="fas fa-history"></i> Changelog v1.4</div>
+                            <div class="changelog-title"><i class="fas fa-history"></i> Changelog v1.5</div>
                             <ul class="changelog-list">
-                                <li><i class="fas fa-city"></i> Penambahan 25+ kota Indonesia lengkap</li>
+                                <li><i class="fas fa-video"></i> Video eye2.mp4 di halaman Home</li>
+                                <li><i class="fas fa-bell"></i> Custom notifikasi modern (tanpa alert jelek)</li>
+                                <li><i class="fas fa-city"></i> 35+ kota Indonesia lengkap</li>
                                 <li><i class="fas fa-user-cog"></i> Tombol Owner Social Media</li>
-                                <li><i class="fas fa-typography"></i> Perbaikan font semua teks</li>
                                 <li><i class="fas fa-globe"></i> World Clock 40+ lokasi dunia</li>
                                 <li><i class="fas fa-file-code"></i> Fitur Code Scraper</li>
                                 <li><i class="fas fa-shield-alt"></i> Sistem keamanan anti-inspect</li>
@@ -940,8 +1011,10 @@
                 mainAppDiv.classList.remove('hidden');
                 startClockUpdate();
                 loadPage('home');
+                showNotification('Login berhasil! Selamat datang, admin.', 'success');
             } else {
                 errorMsg.innerText = "Username atau password salah!";
+                showNotification('Username atau password salah!', 'error');
             }
         }
         loginForm.addEventListener('submit', doLogin);
@@ -954,6 +1027,7 @@
             mainAppDiv.classList.add('hidden');
             loginPageDiv.classList.remove('hidden');
             document.getElementById('eyeVideo')?.play().catch(() => {});
+            showNotification('Anda telah logout', 'info');
         }
         
         function setActiveNavButton(page) {
@@ -972,8 +1046,16 @@
             if (page === 'home') {
                 pageContentDiv.innerHTML = renderHome();
                 setActiveNavButton('home');
+                setTimeout(() => {
+                    const homeVideo = document.getElementById('homeVideo');
+                    if (homeVideo) {
+                        homeVideo.play().catch(() => {});
+                        homeVideo.addEventListener('error', () => { homeVideo.style.background = "#11152e"; });
+                    }
+                }, 100);
                 document.getElementById('ownerBtn')?.addEventListener('click', () => {
                     window.open('https://brechq.site', '_blank');
+                    showNotification('Membuka website Owner', 'info');
                 });
             } else if (page === 'worldclock') {
                 pageContentDiv.innerHTML = renderWorldClockPage();
@@ -1003,7 +1085,7 @@
                         if (isFetching) return;
                         const urlInput = document.getElementById('scraperUrl');
                         let url = urlInput.value.trim();
-                        if (!url) { alert('Masukkan URL!'); return; }
+                        if (!url) { showNotification('Masukkan URL yang valid!', 'error'); return; }
                         if (!url.startsWith('http')) url = 'https://' + url;
                         urlInput.value = url;
                         const errorDiv = document.getElementById('scraperError');
@@ -1036,10 +1118,12 @@
                             resultDiv.style.display = 'block';
                             updateScraperProgress(100, 'Selesai!');
                             setTimeout(() => { document.getElementById('scraperLoading').style.display = 'none'; }, 500);
+                            showNotification('Berhasil mengambil source code!', 'success');
                         } catch(err) {
                             document.getElementById('scraperLoading').style.display = 'none';
                             errorDiv.innerHTML = `<i class="fas fa-exclamation-triangle"></i> Gagal: ${err.message}`;
                             errorDiv.style.display = 'block';
+                            showNotification(`Gagal: ${err.message}`, 'error');
                         } finally {
                             isFetching = false;
                             if (scraperInterval) clearInterval(scraperInterval);
@@ -1047,26 +1131,26 @@
                     }
                     
                     function copyScraperCode() {
-                        if (!currentSourceCode) { alert('Tidak ada source code!'); return; }
+                        if (!currentSourceCode) { showNotification('Tidak ada source code!', 'error'); return; }
                         navigator.clipboard.writeText(currentSourceCode);
-                        alert('Copied!');
+                        showNotification('Source code berhasil disalin!', 'success');
                     }
                     function downloadScraperCode() {
-                        if (!currentSourceCode) { alert('Tidak ada source code!'); return; }
+                        if (!currentSourceCode) { showNotification('Tidak ada source code!', 'error'); return; }
                         const blob = new Blob([currentSourceCode], { type: 'text/html' });
                         const a = document.createElement('a');
                         a.href = URL.createObjectURL(blob);
                         a.download = `source_${Date.now()}.html`;
                         a.click();
                         URL.revokeObjectURL(a.href);
-                        alert('Download dimulai');
+                        showNotification('Download source code dimulai', 'success');
                     }
                     function clearScraperCode() {
                         currentSourceCode = '';
                         document.getElementById('scraperUrl').value = '';
                         document.getElementById('scraperResult').style.display = 'none';
                         document.getElementById('scraperError').style.display = 'none';
-                        alert('Dibersihkan');
+                        showNotification('Semua dibersihkan', 'info');
                     }
                     document.getElementById('scraperFetchBtn')?.addEventListener('click', fetchSourceCode);
                     document.getElementById('scraperCopyBtn')?.addEventListener('click', copyScraperCode);
