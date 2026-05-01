@@ -23,6 +23,24 @@
             justify-content: center;
             padding: 16px;
             background: radial-gradient(circle at 30% 20%, #0f1128, #03051a);
+            position: relative;
+        }
+
+        /* Animated background pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(122, 92, 255, 0.04) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: bgMove 40s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes bgMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
         }
 
         .app-container {
@@ -31,13 +49,13 @@
             height: 90vh;
             max-height: 800px;
             background: rgba(8, 12, 28, 0.65);
-            backdrop-filter: blur(8px);
-            border-radius: 36px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(12px);
+            border-radius: 44px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(176, 126, 255, 0.1);
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            border: 1px solid rgba(176, 126, 255, 0.15);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
 
         .content-scroll {
@@ -58,6 +76,7 @@
             border-radius: 10px;
         }
 
+        /* Login Page */
         .login-page {
             display: flex;
             align-items: center;
@@ -68,14 +87,19 @@
         }
         .login-card {
             background: rgba(20, 24, 50, 0.92);
-            backdrop-filter: blur(16px);
-            border-radius: 32px;
+            backdrop-filter: blur(20px);
+            border-radius: 40px;
             padding: 32px 28px;
             width: 100%;
             max-width: 360px;
             margin: auto;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(140, 100, 255, 0.3);
-            animation: fadeSlideUp 0.5s ease;
+            animation: fadeSlideUp 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .login-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5);
         }
         .brand-horror {
             font-family: 'Creepster', cursive;
@@ -89,14 +113,19 @@
             letter-spacing: 3px;
             text-shadow: 0 0 15px rgba(176, 126, 255, 0.3);
             font-weight: 400;
+            transition: all 0.3s ease;
         }
         .video-eye {
             width: 100%;
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
             margin-bottom: 24px;
             background: #000;
-            box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+        .video-eye:hover {
+            transform: scale(1.02);
         }
         .video-eye video {
             width: 100%;
@@ -112,18 +141,19 @@
             padding: 14px 18px;
             background: rgba(12, 16, 35, 0.9);
             border: 1px solid rgba(140, 100, 255, 0.5);
-            border-radius: 40px;
+            border-radius: 50px;
             font-size: 0.95rem;
             font-weight: 500;
             color: #ffffff;
             outline: none;
             font-family: 'Inter', sans-serif;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
             letter-spacing: 0.3px;
         }
         .input-group input:focus {
             border-color: #b07eff;
             box-shadow: 0 0 0 3px rgba(176, 126, 255, 0.2);
+            transform: scale(1.01);
         }
         .input-group input::placeholder {
             color: #b9beff;
@@ -135,19 +165,35 @@
             background: linear-gradient(95deg, #7a5cff, #b07eff);
             border: none;
             padding: 14px;
-            border-radius: 40px;
+            border-radius: 50px;
             font-weight: 700;
             font-size: 1rem;
             letter-spacing: 1px;
             color: white;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.3s ease;
             margin-top: 10px;
             font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+        .login-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        .login-btn:hover::before {
+            left: 100%;
         }
         .login-btn:hover {
             transform: scale(0.98);
             background: linear-gradient(95deg, #8c6eff, #c292ff);
+            box-shadow: 0 8px 20px rgba(122, 92, 255, 0.4);
         }
         .login-error {
             color: #ffae9e;
@@ -156,12 +202,23 @@
             margin-top: 14px;
             font-weight: 500;
             letter-spacing: 0.2px;
+            animation: shake 0.5s ease;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
 
         .main-app {
             display: flex;
             flex-direction: column;
             height: 100%;
+            animation: fadeInScale 0.5s ease;
+        }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
         }
         .bottom-nav {
             background: rgba(15, 18, 40, 0.95);
@@ -169,9 +226,10 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
-            padding: 8px 20px 12px;
+            padding: 10px 20px 14px;
             border-top: 1px solid rgba(176, 126, 255, 0.35);
-            border-radius: 28px 28px 0 0;
+            border-radius: 32px 32px 0 0;
+            transition: all 0.3s ease;
         }
         .nav-item {
             display: flex;
@@ -186,22 +244,24 @@
             color: #ccd0ff;
             font-size: 0.7rem;
             font-weight: 600;
-            transition: all 0.2s;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             font-family: 'Inter', sans-serif;
             letter-spacing: 0.5px;
         }
         .nav-item i {
             font-size: 1.5rem;
+            transition: transform 0.2s ease;
         }
         .nav-item.active {
             color: #dbbaff;
             background: rgba(122, 92, 255, 0.3);
-        }
-        .nav-item:hover i {
             transform: translateY(-2px);
         }
+        .nav-item:hover i {
+            transform: translateY(-3px) scale(1.1);
+        }
 
-        /* Home Page - with Video */
+        /* Home Page */
         .home-container {
             max-width: 500px;
             margin: 0 auto;
@@ -209,6 +269,11 @@
             flex-direction: column;
             justify-content: center;
             min-height: 100%;
+            animation: fadeInUp 0.5s ease;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .welcome-card {
             text-align: center;
@@ -218,7 +283,11 @@
             border-radius: 32px;
             margin-bottom: 20px;
             border: 1px solid rgba(176, 126, 255, 0.4);
-            width: 100%;
+            transition: all 0.3s ease;
+        }
+        .welcome-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(176, 126, 255, 0.7);
         }
         .welcome-text {
             font-size: 1.6rem;
@@ -226,7 +295,6 @@
             color: #dbbaff;
             margin-bottom: 12px;
             letter-spacing: -0.3px;
-            font-family: 'Inter', sans-serif;
         }
         .core-text {
             font-size: 1.3rem;
@@ -246,6 +314,11 @@
             padding: 20px;
             border: 1px solid rgba(176, 126, 255, 0.3);
             margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .video-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(176, 126, 255, 0.6);
         }
         .video-wrapper {
             width: 100%;
@@ -265,23 +338,38 @@
             background: linear-gradient(95deg, #7a5cff, #b07eff);
             border: none;
             padding: 14px 20px;
-            border-radius: 40px;
+            border-radius: 50px;
             font-weight: 700;
             font-size: 1rem;
             letter-spacing: 1px;
             color: white;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
             font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+        .owner-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        .owner-btn:hover::before {
+            left: 100%;
         }
         .owner-btn:hover {
             transform: scale(0.98);
             background: linear-gradient(95deg, #8c6eff, #c292ff);
-            box-shadow: 0 4px 15px rgba(122, 92, 255, 0.4);
+            box-shadow: 0 8px 20px rgba(122, 92, 255, 0.4);
         }
 
         /* World Clock */
@@ -331,6 +419,10 @@
             justify-content: space-between;
             align-items: center;
         }
+        .city-card:hover {
+            transform: translateX(5px);
+            border-color: rgba(176, 126, 255, 0.6);
+        }
         .city-info {
             flex: 1;
         }
@@ -368,6 +460,10 @@
             max-width: 380px;
             margin: 30px auto;
             border: 1px solid rgba(176, 126, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+        .settings-panel:hover {
+            transform: translateY(-3px);
         }
         .setting-row {
             display: flex;
@@ -375,9 +471,7 @@
             align-items: center;
             padding: 16px 0;
             border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        .setting-row:last-child {
-            border-bottom: none;
+            transition: all 0.2s ease;
         }
         .setting-label {
             font-weight: 600;
@@ -393,6 +487,7 @@
             font-weight: 700;
             color: white;
             letter-spacing: 0.5px;
+            transition: all 0.3s ease;
         }
         .changelog-section {
             margin-top: 20px;
@@ -407,7 +502,6 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            letter-spacing: 0.5px;
         }
         .changelog-list {
             list-style: none;
@@ -421,32 +515,45 @@
             align-items: center;
             gap: 10px;
             font-weight: 500;
-            letter-spacing: 0.2px;
         }
         .changelog-list li i {
             font-size: 0.7rem;
             color: #7a5cff;
             width: 18px;
         }
-        
         .logout-btn {
             width: 100%;
             background: linear-gradient(95deg, rgba(220, 70, 70, 0.85), rgba(180, 50, 50, 0.95));
             border: none;
             padding: 12px;
-            border-radius: 40px;
+            border-radius: 50px;
             font-weight: 700;
             font-size: 0.95rem;
             letter-spacing: 1px;
             color: white;
             cursor: pointer;
-            transition: 0.25s;
+            transition: all 0.3s ease;
             margin-top: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
             font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+        .logout-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        .logout-btn:hover::before {
+            left: 100%;
         }
         .logout-btn:hover {
             transform: scale(0.98);
@@ -464,6 +571,10 @@
             padding: 20px;
             border: 1px solid rgba(176, 126, 255, 0.3);
             margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .scraper-card:hover {
+            transform: translateY(-3px);
         }
         .scraper-header {
             text-align: center;
@@ -478,13 +589,11 @@
             font-weight: 600;
             color: #b07eff;
             margin-bottom: 12px;
-            letter-spacing: 1px;
         }
         .scraper-header h3 {
             color: #e2e6ff;
             font-size: 1.3rem;
             font-weight: 700;
-            letter-spacing: -0.2px;
         }
         .scraper-input-group {
             display: flex;
@@ -512,10 +621,11 @@
             font-weight: 500;
             color: white;
             outline: none;
-            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
         }
         .scraper-url-input:focus {
             border-color: #b07eff;
+            transform: scale(1.01);
         }
         .scraper-btn {
             background: linear-gradient(95deg, #7a5cff, #b07eff);
@@ -525,25 +635,10 @@
             color: white;
             cursor: pointer;
             font-weight: 700;
-            font-family: 'Inter', sans-serif;
-            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
         }
-        .scraper-loading {
-            margin-top: 15px;
-            display: none;
-        }
-        .scraper-loading-bar {
-            background: rgba(255,255,255,0.08);
-            border-radius: 50px;
-            height: 6px;
-            overflow: hidden;
-        }
-        .scraper-loading-progress {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #7a5cff, #b07eff);
-            border-radius: 50px;
-            transition: width 0.3s;
+        .scraper-btn:hover {
+            transform: scale(0.96);
         }
         .scraper-result {
             margin-top: 20px;
@@ -561,11 +656,6 @@
             color: #f5e6b0;
             font-weight: 700;
             font-size: 0.9rem;
-            letter-spacing: 0.5px;
-        }
-        .scraper-result-actions {
-            display: flex;
-            gap: 8px;
         }
         .scraper-action-btn {
             background: rgba(255,255,255,0.1);
@@ -576,11 +666,11 @@
             cursor: pointer;
             font-size: 0.7rem;
             font-weight: 600;
-            transition: 0.2s;
-            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
         }
         .scraper-action-btn:hover {
             background: rgba(122, 92, 255, 0.5);
+            transform: scale(1.05);
         }
         .scraper-pre {
             background: #0a0e1a;
@@ -595,44 +685,26 @@
             word-break: break-word;
             line-height: 1.5;
         }
-        .scraper-error {
-            background: rgba(239, 68, 68, 0.15);
-            border-left: 3px solid #ef4444;
-            padding: 12px;
-            border-radius: 12px;
-            color: #fca5a5;
-            font-size: 0.8rem;
-            margin-top: 15px;
-            display: none;
-            font-weight: 500;
-        }
-        .scraper-stats {
-            margin-top: 12px;
-            font-size: 0.7rem;
-            color: #a5a9ce;
-            font-weight: 500;
-        }
 
-        /* Custom Notification */
+        /* Custom Notification - Lebih Terang */
         .custom-notification {
             position: fixed;
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
-            background: linear-gradient(135deg, rgba(30, 25, 55, 0.98), rgba(20, 18, 45, 0.98));
+            background: linear-gradient(135deg, rgba(40, 35, 70, 0.98), rgba(30, 28, 60, 0.98));
             backdrop-filter: blur(20px);
-            border-radius: 50px;
-            padding: 12px 24px;
+            border-radius: 60px;
+            padding: 14px 28px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             z-index: 10001;
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             opacity: 0;
             visibility: hidden;
-            border: 1px solid rgba(176, 126, 255, 0.5);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 15px rgba(176, 126, 255, 0.2);
-            max-width: 90%;
+            border: 1px solid rgba(176, 126, 255, 0.6);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(176, 126, 255, 0.3);
         }
         .custom-notification.show {
             transform: translateX(-50%) translateY(0);
@@ -640,46 +712,18 @@
             visibility: visible;
         }
         .custom-notification i {
-            font-size: 1.2rem;
-        }
-        .custom-notification i.success {
-            color: #10b981;
-        }
-        .custom-notification i.error {
-            color: #ef4444;
-        }
-        .custom-notification i.info {
-            color: #b07eff;
+            font-size: 1.3rem;
         }
         .custom-notification span {
-            color: #f0f2ff;
-            font-size: 0.85rem;
-            font-weight: 500;
+            color: #ffffff;
+            font-size: 0.9rem;
+            font-weight: 600;
             letter-spacing: 0.3px;
-        }
-
-        @keyframes fadeSlideUp {
-            from { opacity: 0; transform: translateY(20px);}
-            to { opacity: 1; transform: translateY(0);}
-        }
-
-        @media (max-width: 550px) {
-            body { padding: 10px; }
-            .app-container { height: 95vh; border-radius: 28px; }
-            .brand-horror { font-size: 2.5rem; }
-            .city-time { font-size: 1.15rem; }
-            .city-name { font-size: 0.9rem; }
-            .nav-item { padding: 6px 8px; }
-            .nav-item i { font-size: 1.3rem; }
-            .nav-item span { font-size: 0.6rem; }
-            .welcome-text { font-size: 1.3rem; }
-            .core-text { font-size: 1.1rem; }
-            .scraper-input-group { flex-direction: column; }
-            .scraper-btn { padding: 10px; }
+            text-shadow: 0 0 5px rgba(0,0,0,0.3);
         }
 
         .hidden { display: none !important; }
-        
+
         /* Security Popup */
         .security-popup {
             position: fixed;
@@ -688,41 +732,22 @@
             transform: translate(-50%, -50%) scale(0.9);
             background: linear-gradient(135deg, rgba(30, 20, 40, 0.98), rgba(20, 15, 35, 0.98));
             backdrop-filter: blur(20px);
-            border-radius: 28px;
+            border-radius: 32px;
             padding: 24px;
             max-width: 320px;
             width: 85%;
             text-align: center;
             border: 1px solid rgba(255, 80, 80, 0.5);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 50, 50, 0.3);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
             z-index: 10000;
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            pointer-events: none;
         }
         .security-popup.show {
             opacity: 1;
             visibility: visible;
             transform: translate(-50%, -50%) scale(1);
-            pointer-events: auto;
-        }
-        .security-popup i {
-            font-size: 3rem;
-            color: #ff6b6b;
-            margin-bottom: 12px;
-        }
-        .security-popup h3 {
-            color: #ff8a8a;
-            font-size: 1.3rem;
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-        .security-popup p {
-            color: #ccd0ff;
-            font-size: 0.85rem;
-            margin-bottom: 20px;
-            font-weight: 500;
         }
         .security-popup button {
             background: linear-gradient(95deg, #ff6b6b, #ff4444);
@@ -732,26 +757,24 @@
             color: white;
             font-weight: 700;
             cursor: pointer;
-            transition: 0.2s;
-            font-family: 'Inter', sans-serif;
+            margin-top: 10px;
         }
-        .security-popup button:hover {
-            transform: scale(0.96);
+
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(30px);}
+            to { opacity: 1; transform: translateY(0);}
         }
     </style>
 </head>
 <body>
-    <!-- Security Popup -->
     <div id="securityPopup" class="security-popup">
         <i class="fas fa-shield-alt"></i>
         <h3>Akses Diblokir!</h3>
-        <p id="popupMessage">⛔ Fitur ini tidak tersedia untuk keamanan</p>
-        <button onclick="closeSecurityPopup()">OK, Saya Mengerti</button>
+        <p id="popupMessage">⛔ Fitur ini tidak tersedia</p>
+        <button onclick="closeSecurityPopup()">OK</button>
     </div>
-
-    <!-- Custom Notification -->
     <div id="customNotification" class="custom-notification">
-        <i id="notificationIcon" class="fas fa-check-circle success"></i>
+        <i id="notificationIcon" class="fas fa-check-circle" style="color: #4ade80;"></i>
         <span id="notificationMessage">Berhasil!</span>
     </div>
 
@@ -766,17 +789,16 @@
                 </div>
                 <form id="loginForm" action="javascript:void(0);">
                     <div class="input-group">
-                        <input type="text" id="username" placeholder="Username" autocomplete="off" required>
+                        <input type="text" id="username" placeholder="Username" autocomplete="off">
                     </div>
                     <div class="input-group">
-                        <input type="password" id="password" placeholder="Password" required>
+                        <input type="password" id="password" placeholder="Password">
                     </div>
                     <button type="submit" class="login-btn">Login</button>
                     <div id="loginErrorMsg" class="login-error"></div>
                 </form>
             </div>
         </div>
-
         <div id="mainApp" class="main-app hidden">
             <div class="content-scroll" id="pageContent"></div>
             <div class="bottom-nav">
@@ -789,392 +811,192 @@
     </div>
 
     <script>
-        // ============ CUSTOM NOTIFICATION ============
-        let notifTimeout;
-        
-        function showNotification(message, type = 'success') {
+        // Notification - lebih terang
+        function showNotification(msg, type = 'success') {
             const notif = document.getElementById('customNotification');
             const icon = document.getElementById('notificationIcon');
-            const msg = document.getElementById('notificationMessage');
-            
             if (type === 'success') {
-                icon.className = 'fas fa-check-circle success';
+                icon.className = 'fas fa-check-circle';
+                icon.style.color = '#4ade80';
             } else if (type === 'error') {
-                icon.className = 'fas fa-exclamation-circle error';
+                icon.className = 'fas fa-exclamation-circle';
+                icon.style.color = '#f87171';
             } else {
-                icon.className = 'fas fa-info-circle info';
+                icon.className = 'fas fa-info-circle';
+                icon.style.color = '#b07eff';
             }
-            
-            msg.textContent = message;
+            document.getElementById('notificationMessage').textContent = msg;
             notif.classList.add('show');
-            
-            if (notifTimeout) clearTimeout(notifTimeout);
-            notifTimeout = setTimeout(() => {
-                notif.classList.remove('show');
-            }, 2500);
+            setTimeout(() => notif.classList.remove('show'), 2500);
         }
 
-        // ============ SECURITY SYSTEM ============
+        // Security
         let popupTimeout;
-        
-        function showSecurityPopup(message, isLegal = false) {
-            if (isLegal) return;
+        function showSecurityPopup(msg) {
             const popup = document.getElementById('securityPopup');
-            const popupMessage = document.getElementById('popupMessage');
-            popupMessage.innerHTML = message;
+            document.getElementById('popupMessage').innerHTML = msg;
             popup.classList.add('show');
             if (popupTimeout) clearTimeout(popupTimeout);
-            popupTimeout = setTimeout(() => {
-                popup.classList.remove('show');
-            }, 2500);
+            popupTimeout = setTimeout(() => popup.classList.remove('show'), 2500);
         }
-        
-        function closeSecurityPopup() {
-            const popup = document.getElementById('securityPopup');
-            popup.classList.remove('show');
-            if (popupTimeout) clearTimeout(popupTimeout);
-        }
-        
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-            showSecurityPopup('⛔ Klik kanan tidak diperbolehkan!');
-            return false;
-        });
-        
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'F12') {
-                e.preventDefault();
-                showSecurityPopup('⛔ Dev Tools tidak tersedia!');
-                return false;
-            }
-            if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
-                e.preventDefault();
-                showSecurityPopup('⛔ Inspect Element tidak diperbolehkan!');
-                return false;
-            }
-            if (e.ctrlKey && e.key === 'u') {
-                e.preventDefault();
-                showSecurityPopup('⛔ View Source tidak tersedia!');
-                return false;
-            }
-            if (e.ctrlKey && e.key === 's') {
-                e.preventDefault();
-                showSecurityPopup('⛔ Menyimpan halaman tidak diperbolehkan!');
-                return false;
-            }
-            if (e.ctrlKey && e.key === 'p') {
-                e.preventDefault();
-                showSecurityPopup('⛔ Print halaman tidak tersedia!');
-                return false;
-            }
-            if (e.shiftKey && e.key === 'F10') {
-                e.preventDefault();
-                showSecurityPopup('⛔ Menu konteks tidak tersedia!');
-                return false;
-            }
-        });
-        
-        document.addEventListener('dragstart', function(e) {
-            e.preventDefault();
-            return false;
-        });
+        function closeSecurityPopup() { document.getElementById('securityPopup').classList.remove('show'); }
 
-        // ============ APP LOGIC ============
+        document.addEventListener('contextmenu', e => { e.preventDefault(); showSecurityPopup('⛔ Klik kanan tidak diperbolehkan!'); });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && e.key === 'u') || (e.ctrlKey && e.key === 's') || (e.ctrlKey && e.key === 'p') || (e.shiftKey && e.key === 'F10')) {
+                e.preventDefault();
+                showSecurityPopup('⛔ Fitur ini diblokir untuk keamanan!');
+            }
+        });
+        document.addEventListener('dragstart', e => e.preventDefault());
+
+        // Data
         const indonesiaCities = [
-            { name: "Sabang", timezone: "Asia/Jakarta" }, { name: "Banda Aceh", timezone: "Asia/Jakarta" },
-            { name: "Medan", timezone: "Asia/Jakarta" }, { name: "Padang", timezone: "Asia/Jakarta" },
-            { name: "Pekanbaru", timezone: "Asia/Jakarta" }, { name: "Batam", timezone: "Asia/Jakarta" },
-            { name: "Palembang", timezone: "Asia/Jakarta" }, { name: "Bengkulu", timezone: "Asia/Jakarta" },
-            { name: "Bandar Lampung", timezone: "Asia/Jakarta" }, { name: "Jakarta", timezone: "Asia/Jakarta" },
-            { name: "Bandung", timezone: "Asia/Jakarta" }, { name: "Semarang", timezone: "Asia/Jakarta" },
-            { name: "Yogyakarta", timezone: "Asia/Jakarta" }, { name: "Surabaya", timezone: "Asia/Jakarta" },
-            { name: "Malang", timezone: "Asia/Jakarta" }, { name: "Banyuwangi", timezone: "Asia/Jakarta" },
-            { name: "Denpasar", timezone: "Asia/Makassar" }, { name: "Mataram", timezone: "Asia/Makassar" },
-            { name: "Kupang", timezone: "Asia/Makassar" }, { name: "Pontianak", timezone: "Asia/Pontianak" },
-            { name: "Palangkaraya", timezone: "Asia/Pontianak" }, { name: "Banjarmasin", timezone: "Asia/Makassar" },
-            { name: "Balikpapan", timezone: "Asia/Makassar" }, { name: "Samarinda", timezone: "Asia/Makassar" },
-            { name: "Manado", timezone: "Asia/Makassar" }, { name: "Palu", timezone: "Asia/Makassar" },
-            { name: "Makassar", timezone: "Asia/Makassar" }, { name: "Kendari", timezone: "Asia/Makassar" },
-            { name: "Gorontalo", timezone: "Asia/Makassar" }, { name: "Ambon", timezone: "Asia/Jayapura" },
-            { name: "Ternate", timezone: "Asia/Jayapura" }, { name: "Sorong", timezone: "Asia/Jayapura" },
-            { name: "Manokwari", timezone: "Asia/Jayapura" }, { name: "Jayapura", timezone: "Asia/Jayapura" },
-            { name: "Merauke", timezone: "Asia/Jayapura" }
+            "Sabang","Banda Aceh","Medan","Padang","Pekanbaru","Batam","Palembang","Bengkulu","Bandar Lampung",
+            "Jakarta","Bandung","Semarang","Yogyakarta","Surabaya","Malang","Banyuwangi","Denpasar","Mataram",
+            "Kupang","Pontianak","Palangkaraya","Banjarmasin","Balikpapan","Samarinda","Manado","Palu","Makassar",
+            "Kendari","Gorontalo","Ambon","Ternate","Sorong","Manokwari","Jayapura","Merauke"
         ];
+        const internationalCountries = ["Amerika Serikat","Inggris","Jepang","Australia","Uni Emirat Arab","China","Singapura","Malaysia","Thailand","Korea Selatan","India","Prancis","Jerman","Italia","Spanyol","Belanda"];
         
-        const internationalCountries = [
-            { name: "Amerika Serikat", timezone: "America/New_York" }, { name: "Inggris", timezone: "Europe/London" },
-            { name: "Jepang", timezone: "Asia/Tokyo" }, { name: "Australia", timezone: "Australia/Sydney" },
-            { name: "Uni Emirat Arab", timezone: "Asia/Dubai" }, { name: "China", timezone: "Asia/Shanghai" },
-            { name: "Singapura", timezone: "Asia/Singapore" }, { name: "Malaysia", timezone: "Asia/Kuala_Lumpur" },
-            { name: "Thailand", timezone: "Asia/Bangkok" }, { name: "Korea Selatan", timezone: "Asia/Seoul" },
-            { name: "India", timezone: "Asia/Kolkata" }, { name: "Prancis", timezone: "Europe/Paris" },
-            { name: "Jerman", timezone: "Europe/Berlin" }, { name: "Italia", timezone: "Europe/Rome" },
-            { name: "Spanyol", timezone: "Europe/Madrid" }, { name: "Belanda", timezone: "Europe/Amsterdam" }
-        ];
+        function getTime(tz) { try { return new Date().toLocaleTimeString('id-ID', { timeZone: tz, hour:'2-digit', minute:'2-digit', second:'2-digit' }); } catch(e) { return new Date().toLocaleTimeString('id-ID'); } }
+        function getDate(tz) { try { return new Date().toLocaleDateString('id-ID', { timeZone: tz, weekday:'short', day:'numeric', month:'short' }); } catch(e) { return new Date().toLocaleDateString('id-ID'); } }
         
-        function getTimeForTimezone(timezone) {
-            try { return new Date().toLocaleTimeString('id-ID', { timeZone: timezone, hour: '2-digit', minute: '2-digit', second: '2-digit' }); }
-            catch(e) { return new Date().toLocaleTimeString('id-ID'); }
-        }
-        
-        function getDateForTimezone(timezone) {
-            try { return new Date().toLocaleDateString('id-ID', { timeZone: timezone, weekday: 'short', day: 'numeric', month: 'short' }); }
-            catch(e) { return new Date().toLocaleDateString('id-ID'); }
-        }
-        
+        // UI Functions
         function renderHome() {
-            return `
-                <div class="home-container">
-                    <div class="welcome-card">
-                        <div class="welcome-text">Welcome, admin!</div>
-                        <div class="core-text">BRQ CORE</div>
-                    </div>
-                    <div class="video-card">
-                        <div class="video-wrapper">
-                            <video autoplay muted loop playsinline id="homeVideo">
-                                <source src="eye2.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                    </div>
-                    <button class="owner-btn" id="ownerBtn">
-                        <i class="fas fa-user-cog"></i> Owner Social Media
-                    </button>
-                </div>
-            `;
+            return `<div class="home-container"><div class="welcome-card"><div class="welcome-text">Welcome, Admin!</div><div class="core-text">BRQ CORE</div></div><div class="video-card"><div class="video-wrapper"><video autoplay muted loop playsinline id="homeVideo"><source src="eye2.mp4" type="video/mp4"></video></div></div><button class="owner-btn" id="ownerBtn"><i class="fas fa-user-cog"></i> Owner Social Media</button></div>`;
         }
         
+        function renderWorldClockPage() { return `<div class="world-clock-container" id="worldClockContainer"></div>`; }
         function renderWorldClock() {
-            const container = document.getElementById('worldClockContainer');
-            if (!container) return;
             let html = `<div class="region-section"><div class="region-title"><i class="fas fa-map-marker-alt"></i> 🇮🇩 Indonesia</div><div class="cities-list">`;
-            indonesiaCities.forEach(city => { html += `<div class="city-card"><div class="city-info"><div class="city-name">📍 ${city.name}</div><div class="city-time">${getTimeForTimezone(city.timezone)}</div><div class="city-date">${getDateForTimezone(city.timezone)}</div></div></div>`; });
+            indonesiaCities.forEach(c => { html += `<div class="city-card"><div class="city-info"><div class="city-name">📍 ${c}</div><div class="city-time">${getTime('Asia/Jakarta')}</div><div class="city-date">${getDate('Asia/Jakarta')}</div></div></div>`; });
             html += `</div></div><div class="region-section"><div class="region-title"><i class="fas fa-globe-asia"></i> 🌏 Luar Negeri</div><div class="cities-list">`;
-            internationalCountries.forEach(country => { html += `<div class="city-card"><div class="city-info"><div class="city-name">🌏 ${country.name}</div><div class="city-time">${getTimeForTimezone(country.timezone)}</div><div class="city-date">${getDateForTimezone(country.timezone)}</div></div></div>`; });
+            internationalCountries.forEach(c => { html += `<div class="city-card"><div class="city-info"><div class="city-name">🌏 ${c}</div><div class="city-time">${getTime('Asia/Jakarta')}</div><div class="city-date">${getDate('Asia/Jakarta')}</div></div></div>`; });
             html += `</div></div>`;
-            container.innerHTML = html;
-        }
-        
-        function renderWorldClockPage() {
-            return `<div class="world-clock-container" id="worldClockContainer"></div>`;
+            document.getElementById('worldClockContainer').innerHTML = html;
         }
         
         function renderSettings() {
-            return `
-                <div class="page-content">
-                    <div class="settings-panel">
-                        <div class="setting-row"><span class="setting-label">Versi aplikasi</span><span class="version-badge">1.5</span></div>
-                        <div class="changelog-section">
-                            <div class="changelog-title"><i class="fas fa-history"></i> Changelog v1.5</div>
-                            <ul class="changelog-list">
-                                <li><i class="fas fa-video"></i> Video eye2.mp4 di halaman Home</li>
-                                <li><i class="fas fa-bell"></i> Custom notifikasi modern (tanpa alert jelek)</li>
-                                <li><i class="fas fa-city"></i> 35+ kota Indonesia lengkap</li>
-                                <li><i class="fas fa-user-cog"></i> Tombol Owner Social Media</li>
-                                <li><i class="fas fa-globe"></i> World Clock 40+ lokasi dunia</li>
-                                <li><i class="fas fa-file-code"></i> Fitur Code Scraper</li>
-                                <li><i class="fas fa-shield-alt"></i> Sistem keamanan anti-inspect</li>
-                            </ul>
-                        </div>
-                        <div class="setting-row" style="border-bottom: none; padding-top: 20px;">
-                            <button id="logoutButton" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
-                        </div>
-                    </div>
-                </div>
-            `;
+            return `<div class="settings-panel"><div class="setting-row"><span class="setting-label">Versi aplikasi</span><span class="version-badge">1.6</span></div><div class="changelog-section"><div class="changelog-title"><i class="fas fa-history"></i> Changelog v1.6</div><ul class="changelog-list"><li><i class="fas fa-video"></i> Video eye2.mp4 di halaman Home</li><li><i class="fas fa-bell"></i> Custom notifikasi modern & lebih terang</li><li><i class="fas fa-city"></i> 35+ kota Indonesia lengkap</li><li><i class="fas fa-shield-alt"></i> Sistem keamanan anti-inspect</li><li><i class="fas fa-smooth"></i> UI lebih smooth & animasi halus</li><li><i class="fas fa-check-circle"></i> Notifikasi login berhasil lebih jelas</li></ul></div><div class="setting-row" style="border-bottom: none; padding-top: 20px;"><button id="logoutButton" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button></div></div>`;
+        }
+
+        function renderCodeScraperPage() {
+            return `<div class="code-scraper-container"><div class="scraper-card"><div class="scraper-header"><div class="scraper-badge"><i class="fas fa-code"></i> Web Scraper Tool</div><h3><i class="fas fa-file-code"></i> SourceCode Grabber</h3></div><div class="scraper-input-group"><div class="scraper-url-wrapper"><i class="fas fa-link scraper-url-icon"></i><input type="url" id="scraperUrl" class="scraper-url-input" placeholder="https://example.com" value="https://example.com"></div><button class="scraper-btn" id="scraperFetchBtn"><i class="fas fa-magic"></i> Extract</button></div><div class="scraper-loading" id="scraperLoading" style="display:none;"><div class="scraper-loading-bar"><div class="scraper-loading-progress" id="scraperProgressBar"></div></div><div style="display: flex; justify-content: space-between; margin-top: 8px; font-size: 0.7rem; color: #a5a9ce;"><span id="scraperMessage">Memulai...</span><span id="scraperPercent">0%</span></div></div><div class="scraper-error" id="scraperError" style="display:none;"></div><div class="scraper-result" id="scraperResult" style="display:none;"><div class="scraper-result-header"><span><i class="fas fa-code-branch"></i> Source Code</span><div class="scraper-result-actions"><button class="scraper-action-btn" id="scraperCopyBtn"><i class="fas fa-copy"></i> Copy</button><button class="scraper-action-btn" id="scraperDownloadBtn"><i class="fas fa-download"></i> Download</button><button class="scraper-action-btn" id="scraperClearBtn"><i class="fas fa-trash"></i> Clear</button></div></div><pre class="scraper-pre" id="scraperSourceCode"></pre><div class="scraper-stats" id="scraperStats"></div></div></div></div>`;
         }
         
-        let clockInterval;
-        let activePage = 'home';
-        
-        function startClockUpdate() {
-            if (clockInterval) clearInterval(clockInterval);
-            clockInterval = setInterval(() => { if (activePage === 'worldclock') renderWorldClock(); }, 1000);
+        function initCodeScraper() {
+            const PROXY_URL = (url) => `https://api.codetabs.com/v1/proxy/?quest=${encodeURIComponent(url)}`;
+            let currentSource = '', isFetching = false;
+            const fetchBtn = document.getElementById('scraperFetchBtn');
+            if (!fetchBtn) return;
+            fetchBtn.onclick = async () => {
+                if (isFetching) return;
+                let url = document.getElementById('scraperUrl').value.trim();
+                if (!url) { showNotification('Masukkan URL!', 'error'); return; }
+                if (!url.startsWith('http')) url = 'https://' + url;
+                document.getElementById('scraperUrl').value = url;
+                document.getElementById('scraperError').style.display = 'none';
+                document.getElementById('scraperResult').style.display = 'none';
+                document.getElementById('scraperLoading').style.display = 'block';
+                isFetching = true;
+                try {
+                    const response = await fetch(PROXY_URL(url));
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                    const html = await response.text();
+                    currentSource = html;
+                    document.getElementById('scraperSourceCode').textContent = html;
+                    document.getElementById('scraperStats').innerHTML = `<i class="fas fa-database"></i> Ukuran: ${(html.length/1024).toFixed(2)} KB | <i class="fas fa-code"></i> Karakter: ${html.length.toLocaleString()}`;
+                    document.getElementById('scraperResult').style.display = 'block';
+                    showNotification('Berhasil mengambil source code!', 'success');
+                } catch(err) {
+                    document.getElementById('scraperError').innerHTML = `<i class="fas fa-exclamation-triangle"></i> Gagal: ${err.message}`;
+                    document.getElementById('scraperError').style.display = 'block';
+                    showNotification(`Gagal: ${err.message}`, 'error');
+                } finally {
+                    document.getElementById('scraperLoading').style.display = 'none';
+                    isFetching = false;
+                }
+            };
+            document.getElementById('scraperCopyBtn').onclick = () => { if(currentSource) { navigator.clipboard.writeText(currentSource); showNotification('Copied!', 'success'); } else showNotification('Tidak ada source code!', 'error'); };
+            document.getElementById('scraperDownloadBtn').onclick = () => { if(currentSource) { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([currentSource], {type:'text/html'})); a.download = `source_${Date.now()}.html`; a.click(); showNotification('Download dimulai', 'success'); } else showNotification('Tidak ada source code!', 'error'); };
+            document.getElementById('scraperClearBtn').onclick = () => { currentSource = ''; document.getElementById('scraperUrl').value = ''; document.getElementById('scraperResult').style.display = 'none'; document.getElementById('scraperError').style.display = 'none'; showNotification('Dibersihkan', 'info'); };
         }
+
+        let clockInterval, activePage = 'home';
+        function startClockUpdate() { if (clockInterval) clearInterval(clockInterval); clockInterval = setInterval(() => { if (activePage === 'worldclock') renderWorldClock(); }, 1000); }
         
-        const loginPageDiv = document.getElementById('loginPage');
-        const mainAppDiv = document.getElementById('mainApp');
-        const loginForm = document.getElementById('loginForm');
-        const errorMsg = document.getElementById('loginErrorMsg');
-        const pageContentDiv = document.getElementById('pageContent');
-        const homeBtn = document.getElementById('homeNavBtn');
-        const worldClockBtn = document.getElementById('worldClockNavBtn');
-        const codeScraperBtn = document.getElementById('codeScraperNavBtn');
-        const settingsBtn = document.getElementById('settingsNavBtn');
+        const loginPage = document.getElementById('loginPage'), mainApp = document.getElementById('mainApp'), pageContent = document.getElementById('pageContent');
+        const homeBtn = document.getElementById('homeNavBtn'), worldBtn = document.getElementById('worldClockNavBtn'), codeBtn = document.getElementById('codeScraperNavBtn'), settingsBtn = document.getElementById('settingsNavBtn');
         
-        function doLogin(e) {
-            e.preventDefault();
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value.trim();
-            if (username === "admin" && password === "1234") {
-                errorMsg.innerText = "";
-                loginPageDiv.classList.add('hidden');
-                mainAppDiv.classList.remove('hidden');
+        function doLogin() {
+            const user = document.getElementById('username').value.trim();
+            const pass = document.getElementById('password').value.trim();
+            if (user === "admin" && pass === "1234") {
+                document.getElementById('loginErrorMsg').innerText = '';
+                loginPage.classList.add('hidden');
+                mainApp.classList.remove('hidden');
                 startClockUpdate();
                 loadPage('home');
-                showNotification('Login berhasil! Selamat datang, admin.', 'success');
+                showNotification('✅ Login berhasil! Selamat datang, Admin.', 'success');
             } else {
-                errorMsg.innerText = "Username atau password salah!";
-                showNotification('Username atau password salah!', 'error');
+                document.getElementById('loginErrorMsg').innerText = "Username atau password salah!";
+                showNotification('❌ Login gagal! Username atau password salah.', 'error');
             }
         }
-        loginForm.addEventListener('submit', doLogin);
+        document.getElementById('loginForm').addEventListener('submit', (e) => { e.preventDefault(); doLogin(); });
         
         function logout() {
+            if (clockInterval) clearInterval(clockInterval);
+            mainApp.classList.add('hidden');
+            loginPage.classList.remove('hidden');
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
-            errorMsg.innerText = '';
-            if (clockInterval) clearInterval(clockInterval);
-            mainAppDiv.classList.add('hidden');
-            loginPageDiv.classList.remove('hidden');
+            document.getElementById('loginErrorMsg').innerText = '';
             document.getElementById('eyeVideo')?.play().catch(() => {});
-            showNotification('Anda telah logout', 'info');
+            showNotification('👋 Anda telah logout', 'info');
         }
         
-        function setActiveNavButton(page) {
-            homeBtn.classList.remove('active');
-            worldClockBtn.classList.remove('active');
-            codeScraperBtn.classList.remove('active');
-            settingsBtn.classList.remove('active');
+        function setActive(page) {
+            [homeBtn, worldBtn, codeBtn, settingsBtn].forEach(btn => btn.classList.remove('active'));
             if (page === 'home') homeBtn.classList.add('active');
-            else if (page === 'worldclock') worldClockBtn.classList.add('active');
-            else if (page === 'codescraper') codeScraperBtn.classList.add('active');
+            else if (page === 'worldclock') worldBtn.classList.add('active');
+            else if (page === 'codescraper') codeBtn.classList.add('active');
             else if (page === 'settings') settingsBtn.classList.add('active');
         }
         
         function loadPage(page) {
             activePage = page;
             if (page === 'home') {
-                pageContentDiv.innerHTML = renderHome();
-                setActiveNavButton('home');
-                setTimeout(() => {
-                    const homeVideo = document.getElementById('homeVideo');
-                    if (homeVideo) {
-                        homeVideo.play().catch(() => {});
-                        homeVideo.addEventListener('error', () => { homeVideo.style.background = "#11152e"; });
-                    }
-                }, 100);
-                document.getElementById('ownerBtn')?.addEventListener('click', () => {
-                    window.open('https://brechq.site', '_blank');
-                    showNotification('Membuka website Owner', 'info');
-                });
+                pageContent.innerHTML = renderHome();
+                setActive('home');
+                setTimeout(() => { const v = document.getElementById('homeVideo'); if(v) v.play().catch(()=>{}); }, 100);
+                document.getElementById('ownerBtn')?.addEventListener('click', () => { window.open('https://brechq.site', '_blank'); showNotification('🌐 Membuka website Owner', 'info'); });
             } else if (page === 'worldclock') {
-                pageContentDiv.innerHTML = renderWorldClockPage();
-                setActiveNavButton('worldclock');
+                pageContent.innerHTML = renderWorldClockPage();
+                setActive('worldclock');
                 renderWorldClock();
             } else if (page === 'codescraper') {
-                pageContentDiv.innerHTML = `<div class="code-scraper-container"><div class="scraper-card"><div class="scraper-header"><div class="scraper-badge"><i class="fas fa-code"></i> Web Scraper Tool</div><h3><i class="fas fa-file-code"></i> SourceCode Grabber</h3></div><div class="scraper-input-group"><div class="scraper-url-wrapper"><i class="fas fa-link scraper-url-icon"></i><input type="url" id="scraperUrl" class="scraper-url-input" placeholder="https://example.com" value="https://example.com"></div><button class="scraper-btn" id="scraperFetchBtn"><i class="fas fa-magic"></i> Extract</button></div><div class="scraper-loading" id="scraperLoading"><div class="scraper-loading-bar"><div class="scraper-loading-progress" id="scraperProgressBar"></div></div><div style="display: flex; justify-content: space-between; margin-top: 8px; font-size: 0.7rem; color: #a5a9ce;"><span id="scraperMessage">Memulai...</span><span id="scraperPercent">0%</span></div></div><div class="scraper-error" id="scraperError"></div><div class="scraper-result" id="scraperResult"><div class="scraper-result-header"><span><i class="fas fa-code-branch"></i> Source Code</span><div class="scraper-result-actions"><button class="scraper-action-btn" id="scraperCopyBtn"><i class="fas fa-copy"></i> Copy</button><button class="scraper-action-btn" id="scraperDownloadBtn"><i class="fas fa-download"></i> Download</button><button class="scraper-action-btn" id="scraperClearBtn"><i class="fas fa-trash"></i> Clear</button></div></div><pre class="scraper-pre" id="scraperSourceCode"></pre><div class="scraper-stats" id="scraperStats"></div></div></div></div>`;
-                setActiveNavButton('codescraper');
-                setTimeout(() => {
-                    const PROXY_URL = (url) => `https://api.codetabs.com/v1/proxy/?quest=${encodeURIComponent(url)}`;
-                    let currentSourceCode = '';
-                    let isFetching = false;
-                    let scraperInterval = null;
-                    let scraperProgress = 0;
-                    
-                    function updateScraperProgress(percent, msg) {
-                        scraperProgress = percent;
-                        const bar = document.getElementById('scraperProgressBar');
-                        const percentEl = document.getElementById('scraperPercent');
-                        const msgEl = document.getElementById('scraperMessage');
-                        if (bar) bar.style.width = percent + '%';
-                        if (percentEl) percentEl.textContent = Math.floor(percent) + '%';
-                        if (msgEl) msgEl.innerHTML = `<i class="fas fa-spinner fa-pulse"></i> ${msg}`;
-                    }
-                    
-                    async function fetchSourceCode() {
-                        if (isFetching) return;
-                        const urlInput = document.getElementById('scraperUrl');
-                        let url = urlInput.value.trim();
-                        if (!url) { showNotification('Masukkan URL yang valid!', 'error'); return; }
-                        if (!url.startsWith('http')) url = 'https://' + url;
-                        urlInput.value = url;
-                        const errorDiv = document.getElementById('scraperError');
-                        const resultDiv = document.getElementById('scraperResult');
-                        errorDiv.style.display = 'none';
-                        resultDiv.style.display = 'none';
-                        isFetching = true;
-                        document.getElementById('scraperLoading').style.display = 'block';
-                        scraperProgress = 0;
-                        updateScraperProgress(0, 'Memulai...');
-                        if (scraperInterval) clearInterval(scraperInterval);
-                        scraperInterval = setInterval(() => {
-                            if (scraperProgress < 90 && isFetching) {
-                                updateScraperProgress(Math.min(scraperProgress + 5, 90), 'Mengambil data...');
-                            }
-                        }, 200);
-                        try {
-                            updateScraperProgress(20, 'Validasi URL...');
-                            await new Promise(r => setTimeout(r, 200));
-                            const proxyUrl = PROXY_URL(url);
-                            const response = await fetch(proxyUrl);
-                            updateScraperProgress(70, 'Menerima response...');
-                            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                            const html = await response.text();
-                            updateScraperProgress(90, 'Memproses...');
-                            if (!html || html.length < 50) throw new Error('Source code kosong');
-                            currentSourceCode = html;
-                            document.getElementById('scraperSourceCode').textContent = html;
-                            document.getElementById('scraperStats').innerHTML = `<i class="fas fa-database"></i> Ukuran: ${(html.length/1024).toFixed(2)} KB | <i class="fas fa-code"></i> Karakter: ${html.length.toLocaleString()}`;
-                            resultDiv.style.display = 'block';
-                            updateScraperProgress(100, 'Selesai!');
-                            setTimeout(() => { document.getElementById('scraperLoading').style.display = 'none'; }, 500);
-                            showNotification('Berhasil mengambil source code!', 'success');
-                        } catch(err) {
-                            document.getElementById('scraperLoading').style.display = 'none';
-                            errorDiv.innerHTML = `<i class="fas fa-exclamation-triangle"></i> Gagal: ${err.message}`;
-                            errorDiv.style.display = 'block';
-                            showNotification(`Gagal: ${err.message}`, 'error');
-                        } finally {
-                            isFetching = false;
-                            if (scraperInterval) clearInterval(scraperInterval);
-                        }
-                    }
-                    
-                    function copyScraperCode() {
-                        if (!currentSourceCode) { showNotification('Tidak ada source code!', 'error'); return; }
-                        navigator.clipboard.writeText(currentSourceCode);
-                        showNotification('Source code berhasil disalin!', 'success');
-                    }
-                    function downloadScraperCode() {
-                        if (!currentSourceCode) { showNotification('Tidak ada source code!', 'error'); return; }
-                        const blob = new Blob([currentSourceCode], { type: 'text/html' });
-                        const a = document.createElement('a');
-                        a.href = URL.createObjectURL(blob);
-                        a.download = `source_${Date.now()}.html`;
-                        a.click();
-                        URL.revokeObjectURL(a.href);
-                        showNotification('Download source code dimulai', 'success');
-                    }
-                    function clearScraperCode() {
-                        currentSourceCode = '';
-                        document.getElementById('scraperUrl').value = '';
-                        document.getElementById('scraperResult').style.display = 'none';
-                        document.getElementById('scraperError').style.display = 'none';
-                        showNotification('Semua dibersihkan', 'info');
-                    }
-                    document.getElementById('scraperFetchBtn')?.addEventListener('click', fetchSourceCode);
-                    document.getElementById('scraperCopyBtn')?.addEventListener('click', copyScraperCode);
-                    document.getElementById('scraperDownloadBtn')?.addEventListener('click', downloadScraperCode);
-                    document.getElementById('scraperClearBtn')?.addEventListener('click', clearScraperCode);
-                    document.getElementById('scraperUrl')?.addEventListener('keypress', (e) => { if(e.key === 'Enter') fetchSourceCode(); });
-                }, 100);
+                pageContent.innerHTML = renderCodeScraperPage();
+                setActive('codescraper');
+                setTimeout(initCodeScraper, 100);
             } else if (page === 'settings') {
-                pageContentDiv.innerHTML = renderSettings();
-                setActiveNavButton('settings');
-                document.getElementById('logoutButton')?.addEventListener('click', (e) => { e.preventDefault(); logout(); });
+                pageContent.innerHTML = renderSettings();
+                setActive('settings');
+                document.getElementById('logoutButton')?.addEventListener('click', logout);
             }
-            if (pageContentDiv) pageContentDiv.scrollTop = 0;
+            pageContent.scrollTop = 0;
         }
         
-        homeBtn.addEventListener('click', () => { if (activePage !== 'home') loadPage('home'); });
-        worldClockBtn.addEventListener('click', () => { if (activePage !== 'worldclock') loadPage('worldclock'); });
-        codeScraperBtn.addEventListener('click', () => { if (activePage !== 'codescraper') loadPage('codescraper'); });
-        settingsBtn.addEventListener('click', () => { if (activePage !== 'settings') loadPage('settings'); });
+        homeBtn.onclick = () => { if (activePage !== 'home') loadPage('home'); };
+        worldBtn.onclick = () => { if (activePage !== 'worldclock') loadPage('worldclock'); };
+        codeBtn.onclick = () => { if (activePage !== 'codescraper') loadPage('codescraper'); };
+        settingsBtn.onclick = () => { if (activePage !== 'settings') loadPage('settings'); };
         
         document.getElementById('eyeVideo')?.addEventListener('error', function() { this.style.background = "#11152e"; });
         document.getElementById('eyeVideo')?.play().catch(() => {});
         
-        console.log("%c🚫 BRQ CORE - Protected", "color: #b07eff; font-size: 14px; font-weight: bold;");
+        console.log("%c🔒 BRQ CORE v1.6 - Protected", "color: #b07eff; font-size: 14px; font-weight: bold;");
     </script>
 </body>
 </html>
